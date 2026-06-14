@@ -1,1 +1,0 @@
-# qmood-picocli-quality-analysis
