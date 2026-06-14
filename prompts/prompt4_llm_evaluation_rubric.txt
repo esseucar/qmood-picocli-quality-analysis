@@ -1,0 +1,28 @@
+Aşağıda bir LLM modelinin picocli QMOOD/CK metrikleri üzerine yaptığı kalite değerlendirmesi verilmiştir.
+
+Görevin:
+Bu cevabı aşağıdaki rubriğe göre 1-5 arasında puanla ve kısa gerekçe yaz.
+
+Değerlendirme rubriği:
+1. Metriklere bağlılık: Verilen sayısal değerlere gerçekten dayanıyor mu?
+2. Teknik doğruluk: CK metrikleri, QMOOD kalite nitelikleri ve OO tasarım kavramları doğru kullanılmış mı?
+3. Tutarlılık: Cevap kendi içinde çelişiyor mu?
+4. Refactoring önerisi kalitesi: Öneriler uygulanabilir, somut ve metriklerle ilişkili mi?
+5. Halüsinasyon riski: Verilmeyen sınıf, kod, modül veya mimari ayrıntı uydurulmuş mu?
+6. Sürüm trendini anlama: v4.0.4 → v4.7.7 arasındaki değişim doğru yorumlanmış mi?
+7. Sınırlılık farkındalığı: Proxy metrikler, normalizasyon ve veri eksikliği dikkate alınmış mı?
+
+Cevap formatı:
+
+| Kriter | Puan | Gerekçe |
+|---|---:|---|
+
+Sonunda:
+- Toplam puan:
+- Genel değerlendirme:
+- Bu LLM cevabının raporda kullanılabilirliği:
+- En güçlü yönü:
+- En zayıf yönü:
+
+Değerlendirilecek LLM cevabı:
+[Buraya model cevabını yapıştır]

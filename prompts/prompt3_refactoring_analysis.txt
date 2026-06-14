@@ -1,0 +1,35 @@
+Aşağıdaki metrikler picocli projesinin v4.0.4 ile v4.7.7 sürümleri arasındaki tasarım evrimini göstermektedir.
+
+Özellikle refactoring açısından değerlendir:
+
+Metrik değişimleri:
+- Class count: 192 → 219
+- Method count: 1517 → 1848
+- Avg WMC: 17.4048 → 19.5616
+- Avg RFC: 14.2969 → 15.7763
+- Avg LCOM: 157.7969 → 214.3470
+- Avg CBO: 4.9219 → 5.0411
+- Avg DIT: 1.8125 → 1.7580
+
+QMOOD değişimleri:
+- Reusability: 1.0000 → 1.1132
+- Flexibility: 1.0000 → 1.1054
+- Understandability: -0.9900 → -1.1579
+- Functionality: 1.0000 → 1.0498
+- Extendibility: 1.0000 → 0.9578
+- Effectiveness: 1.0000 → 1.0332
+- TQI: 4.0100 → 4.1015
+
+Görev:
+1. En öncelikli 5 refactoring alanını belirle.
+2. Her refactoring önerisini hangi metriklere dayandırdığını açıkla.
+3. Önerilerin QMOOD kalite niteliklerinden hangilerini iyileştirebileceğini belirt.
+4. Refactoring önerilerini kısa, uygulanabilir ve teknik şekilde yaz.
+5. Sınıf adı veya kod parçası uydurma; sınıf düzeyi veri verilmediği için önerileri metrik düzeyinde yap.
+
+Cevap formatı:
+
+| Öncelik | Refactoring önerisi | Dayandığı metrik | Beklenen kalite etkisi | Risk |
+|---|---|---|---|---|
+
+Ardından 1 paragraflık genel sonuç yaz.

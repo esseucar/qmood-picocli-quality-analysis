@@ -1,0 +1,35 @@
+Aşağıda aynı picocli QMOOD/CK metrik verileri için üç farklı LLM modelinden alınan cevaplar verilmiştir.
+
+Görevin:
+Bu üç LLM cevabını karşılaştırmalı olarak analiz et.
+
+Karşılaştırma kriterleri:
+1. Metriklere bağlılık
+2. Teknik doğruluk
+3. Tutarlılık
+4. Refactoring önerilerinin uygulanabilirliği
+5. Halüsinasyon riski
+6. QMOOD kalite niteliklerini doğru yorumlama
+7. Teknik borç ve bakım yapılabilirlik değerlendirmesi
+8. Sınırlılıkları fark etme
+
+Cevap formatı:
+
+1. Genel karşılaştırma
+2. Model bazlı güçlü ve zayıf yönler
+3. Rubrik tablosu
+
+| Model | Metriklere bağlılık | Teknik doğruluk | Refactoring kalitesi | Halüsinasyon riski | Trend analizi | Genel puan |
+|---|---:|---:|---:|---:|---:|---:|
+
+4. Hangi model daha başarılıydı?
+5. LLM çıktıları QMOOD sonuçlarıyla ne kadar uyumluydu?
+6. Rapor için kullanılabilecek sonuç paragrafı
+
+Model cevapları:
+
+[ChatGPT/Gemini cevabı]
+
+[DeepSeek cevabı]
+
+[Claude cevabı]

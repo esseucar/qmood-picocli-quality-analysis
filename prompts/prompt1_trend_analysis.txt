@@ -1,0 +1,74 @@
+Aşağıda açık kaynak Java tabanlı picocli projesinin 10 farklı sürümü için CK Tool ile çıkarılmış nesne yönelimli metrikler ve bu metriklerden hesaplanmış QMOOD kalite skorları verilmiştir.
+
+Görevin:
+1. Picocli projesinin 10 sürüm boyunca tasarım kalitesi evrimini yorumla.
+2. QMOOD kalite nitelikleri açısından hangi kalite özelliklerinin iyileştiğini ve hangilerinin kötüleştiğini açıkla.
+3. Bakım yapılabilirlik açısından riskleri değerlendir.
+4. Teknik borç birikimi olup olmadığını yorumla.
+5. Coupling, cohesion, complexity ve inheritance açısından mimari kaliteyi değerlendir.
+6. Somut refactoring önerileri sun.
+7. Yorumlarını yalnızca verilen metriklere ve QMOOD skorlarına dayandır.
+8. Verilmeyen sınıf isimleri, modül isimleri veya kod ayrıntıları uydurma.
+9. Sonuçları akademik rapora uygun, teknik ve eleştirel bir dille yaz.
+
+Analiz bağlamı:
+- Kullanılan proje: picocli
+- Dil: Java
+- İncelenen sürüm sayısı: 10
+- Metrik çıkarım aracı: CK Tool
+- QMOOD skorları v4.0.4 sürümü referans alınarak normalize edilmiştir.
+- Bu nedenle skorlar mutlak kalite düzeyi değil, referans sürüme göre göreli kalite değişimini gösterir.
+- QMOOD modelinde kalite nitelikleri Reusability, Flexibility, Understandability, Functionality, Extendibility ve Effectiveness olarak ele alınmıştır.
+- TQI, bu altı kalite niteliğinin toplamı olarak değerlendirilmiştir.
+- Cohesion için TCC değeri elde edilemediği için LCOM değerinden türetilmiş ters cohesion proxy kullanılmıştır.
+- Composition, Inheritance ve Polymorphism için CK Tool çıktılarından türetilmiş proxy metrikler kullanılmıştır.
+
+Temel metrik özeti:
+
+| Sürüm | Class Count | Method Count | Avg CBO | Avg WMC | Avg DIT | Avg RFC | Avg LCOM | DAM |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| v4.0.4 | 192 | 1517 | 4.9219 | 17.4048 | 1.8125 | 14.2969 | 157.7969 | 0.7739 |
+| v4.1.0 | 194 | 1537 | 4.9485 | 17.6031 | 1.8041 | 14.4485 | 160.1928 | 0.7737 |
+| v4.1.4 | 194 | 1537 | 4.9558 | 17.6959 | 1.8041 | 14.5052 | 160.9280 | 0.7737 |
+| v4.2.0 | 199 | 1592 | 4.9950 | 18.0000 | 1.7839 | 14.7437 | 165.2915 | 0.7723 |
+| v4.3.0 | 206 | 1666 | 4.9854 | 18.5097 | 1.7700 | 15.0971 | 173.6410 | 0.7743 |
+| v4.3.2 | 207 | 1668 | 4.9807 | 18.4203 | 1.7826 | 15.0338 | 173.0420 | 0.7727 |
+| v4.4.0 | 209 | 1716 | 4.9569 | 18.7895 | 1.7943 | 15.2105 | 185.5460 | 0.7758 |
+| v4.5.2 | 209 | 1721 | 4.9809 | 18.8325 | 1.7943 | 15.2919 | 185.2300 | 0.7758 |
+| v4.6.3 | 215 | 1805 | 5.0093 | 19.2419 | 1.7721 | 15.5163 | 209.2870 | 0.7737 |
+| v4.7.7 | 219 | 1848 | 5.0411 | 19.5616 | 1.7580 | 15.7763 | 214.3470 | 0.7790 |
+
+QMOOD kalite skorları:
+
+| Sürüm | Reusability | Flexibility | Understandability | Functionality | Extendibility | Effectiveness | TQI |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| v4.0.4 | 1.0000 | 1.0000 | -0.9900 | 1.0000 | 1.0000 | 1.0000 | 4.0100 |
+| v4.1.0 | 1.0063 | 1.0029 | -1.0015 | 1.0032 | 0.9927 | 0.9998 | 4.0034 |
+| v4.1.4 | 1.0058 | 1.0024 | -1.0040 | 1.0032 | 0.9916 | 0.9998 | 3.9989 |
+| v4.2.0 | 1.0319 | 1.0208 | -1.0268 | 1.0152 | 0.9768 | 1.0033 | 4.0211 |
+| v4.3.0 | 1.0655 | 1.0458 | -1.0593 | 1.0293 | 0.9684 | 1.0096 | 4.0593 |
+| v4.3.2 | 1.0705 | 1.0466 | -1.0611 | 1.0314 | 0.9775 | 1.0131 | 4.0780 |
+| v4.4.0 | 1.0803 | 1.0564 | -1.0910 | 1.0346 | 0.9864 | 1.0195 | 4.0863 |
+| v4.5.2 | 1.0809 | 1.0552 | -1.0938 | 1.0354 | 0.9840 | 1.0195 | 4.0812 |
+| v4.6.3 | 1.0927 | 1.0911 | -1.1419 | 1.0403 | 0.9688 | 1.0293 | 4.0804 |
+| v4.7.7 | 1.1132 | 1.1054 | -1.1579 | 1.0498 | 0.9578 | 1.0332 | 4.1015 |
+
+Özellikle şu sorulara cevap ver:
+1. TQI trendi genel olarak nasıl yorumlanmalıdır?
+2. Reusability ve Flexibility artarken Understandability değerinin düşmesi ne anlama gelir?
+3. WMC, RFC ve LCOM artışları bakım yapılabilirlik açısından nasıl yorumlanmalıdır?
+4. CBO değerindeki sınırlı artış mimari coupling açısından ciddi bir risk midir?
+5. DIT değerinin genel olarak düşmesi kalıtım yapısı açısından olumlu mu, olumsuz mu?
+6. Extendibility değerindeki düşüş nasıl açıklanabilir?
+7. Teknik borç belirtileri nelerdir?
+8. Öncelikli refactoring önerileri neler olmalıdır?
+
+Yanıt formatı:
+- Genel değerlendirme
+- Metrik bazlı analiz
+- QMOOD kalite nitelikleri analizi
+- Teknik borç ve bakım yapılabilirlik yorumu
+- Mimari kalite yorumu
+- Refactoring önerileri
+- Sınırlılıklar
+- Sonuç

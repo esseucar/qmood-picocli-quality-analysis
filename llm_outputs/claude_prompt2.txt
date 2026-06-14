@@ -1,0 +1,26 @@
+1. Genel kalite eğilimi:
+TQI 4.0100'den 4.1015'e yükselmiştir. Bu artış yüzeysel olarak olumlu görünse de bileşen bazında incelendiğinde yanıltıcıdır: Reusability, Flexibility, Functionality ve Effectiveness kaynaklı artış, Understandability ve Extendibility'deki gerilemeyi örtmektedir. Proje işlevsel olarak büyümüş; sınıf sayısı 192'den 219'a, metod sayısı 1.517'den 1.848'e çıkmıştır. Ancak bu büyüme iç yapısal sağlıkla orantılı değildir.
+
+2. İyileşen kalite nitelikleri:
+Reusability 1.0000'den 1.1132'ye (+%11.3), Flexibility 1.0000'den 1.1054'e (+%10.5) yükselmiştir. DAM değeri 0.7739'dan 0.7790'a hafifçe artarak veri gizleme pratiğinin korunduğunu göstermektedir. Functionality 1.0498, Effectiveness 1.0332 düzeyine ulaşmıştır.
+
+3. Kötüleşen kalite nitelikleri:
+Understandability -0.9900'den -1.1579'a gerilemiştir. Extendibility ise 1.0000'den 0.9578'e düşerek referans sürümün altına gerilemiştir.
+
+4. Bakım yapılabilirlik riski:
+WMC 17.4048'den 19.5616'ya, RFC 14.2969'dan 15.7763'e yükselmiştir. Bu iki metriğin birlikte büyümesi regresyon testi kapsamını ve maliyetini yükseltmektedir.
+
+5. Teknik borç göstergeleri:
+En güçlü teknik borç sinyali LCOM'dan gelmektedir: 157.7969'dan 214.3470'e yükselen değer %35.8'lik cohesion kaybını temsil etmektedir. WMC artışıyla birlikte okunan bu tablo, yeni özelliklerin mevcut sınıflara eklenen metodlar aracılığıyla hayata geçirilmiş olabileceğini düşündürmektedir.
+
+6. Mimari bozulma işaretleri:
+DIT 1.8125'ten 1.7580'e düşmüştür. CBO 4.9219'dan 5.0411'e yalnızca %2.4 artmıştır; bu bağımlılık ağının henüz kritik eşiğe ulaşmadığını göstermektedir.
+
+7. Refactoring önerileri:
+Yüksek LCOM sınıflarında Extract Class, yüksek WMC sınıflarında Extract Method, Extendibility için Strategy/Template Method, RFC azaltımı için Facade ve CI/CD sürecinde karmaşıklık eşikleri önerilmiştir.
+
+8. Modelin emin olmadığı noktalar:
+Sağlanan veriler sınıf düzeyinde ortalama değerlerdir; hangi sınıfların yüksek LCOM veya WMC taşıdığı bilinmemektedir. Cohesion için TCC yerine LCOM proxy'si kullanılması ölçüm hassasiyetini sınırlandırmaktadır. QMOOD skorlarının v4.0.4 referansıyla normalize edilmesi, sonuçların mutlak değil göreli yorumunu zorunlu kılmaktadır.
+
+9. Kısa sonuç:
+Picocli v4.0.4-v4.7.7 arasında işlevsel olarak olgunlaşmış, TQI 4.01'den 4.10'a yükselmiştir. Ancak LCOM artışı, WMC artışı ve Understandability gerilemesi, bu büyümenin yapısal bir bedelle geldiğini göstermektedir. Cohesion iyileştirme ve karmaşıklık denetimi içeren bir refactoring stratejisi önerilmektedir.

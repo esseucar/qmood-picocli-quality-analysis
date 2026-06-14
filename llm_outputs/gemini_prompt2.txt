@@ -1,0 +1,26 @@
+1. Genel kalite eğilimi:
+Picocli projesinin v4.0.4 sürümünden v4.7.7 sürümüne kadar olan süreçte, Toplam Kalite İndeksi (TQI) 4.0100'den 4.1015'e yükselerek genel bir artış eğilimi göstermiştir. Ancak bu artış homojen bir iyileşmeyi değil; projenin boyut olarak büyümesi (Sınıf sayısı: 192 → 219, Metot sayısı: 1517 → 1848) ve işlevsellik kazanması sürecinde bazı kalite niteliklerinin iyileşirken, bazılarının ciddi şekilde ödünlendiği dengesiz bir evrimi temsil etmektedir. Skorlar normalize edildiği için bu trend mutlak kaliteyi değil, v4.0.4 referansına göre göreli değişimi ifade eder.
+
+2. İyileşen kalite nitelikleri:
+Reusability 1.0000 değerinden 1.1132'ye, Flexibility 1.0000 değerinden 1.1054'e, Functionality 1.0000'den 1.0498'e, Effectiveness 1.0000'den 1.0332'ye yükselmiştir. Bu artışlar sistemin daha fazla işlevsel kapasite kazandığını göstermektedir.
+
+3. Kötüleşen kalite nitelikleri:
+Understandability -0.9900 seviyesinden -1.1579 seviyesine düşerek negatif yönde derinleşmiştir. Extendibility 1.0000 değerinden 0.9578'e gerilemiştir.
+
+4. Bakım yapılabilirlik riski:
+Avg WMC 17.4048'den 19.5616'ya, Avg RFC ise 14.2969'dan 15.7763'e yükselmiştir. Bu iki metriğin artması, test etme ve hata ayıklama maliyetlerinin artabileceğini göstermektedir.
+
+5. Teknik borç göstergeleri:
+Metot sayısındaki artış hızının sınıf sayısı artış hızını geçmesi, WMC/RFC artışı ve Understandability düşüşü mimari borç birikimine işaret etmektedir.
+
+6. Mimari bozulma işaretleri:
+Avg LCOM değeri 157.7969'dan 214.3470'e yükselmiştir. Bu, sınıf içi cohesion kaybını gösterir. Avg CBO değeri 4.9219'dan 5.0411'e sınırlı artmıştır; coupling tarafında kritik bir bozulma görülmemektedir. Avg DIT 1.8125'ten 1.7580'e gerilemiştir.
+
+7. Refactoring önerileri:
+Extract Class, Extract Method ve Hide Method/erişim azaltma önerilmiştir.
+
+8. Modelin emin olmadığı noktalar:
+Kod satırı sayısı, duplike kod oranları, paket/modül organizasyonu ve sınıf düzeyinde ayrıntılar verilmediği için hangi sınıflarda sorunların yoğunlaştığı belirlenememektedir.
+
+9. Kısa sonuç:
+Picocli büyürken işlevsellik, esneklik ve yeniden kullanılabilirlik kazanmış; ancak cohesion kaybı, WMC artışı, Understandability ve Extendibility düşüşü pahasına büyümüştür.

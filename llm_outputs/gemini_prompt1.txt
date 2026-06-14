@@ -1,0 +1,32 @@
+## Genel Değerlendirme
+
+Picocli projesinin v4.0.4 ile v4.7.7 sürümleri arasındaki 10 versiyonluk evrimi, tipik bir yazılım büyüme ve karmaşıklık birikimi senaryosunu ortaya koymaktadır. Sınıf sayısının 192'den 219'a (%14), metot sayısının ise 1517'den 1848'e (%21.8) yükselmesi, projenin aktif olarak genişlediğini ve yeni işlevsellikler kazandığını göstermektedir.
+
+QMOOD Toplam Kalite İndeksi (TQI), v4.0.4'teki 4.0100 seviyesinden v4.7.7'de 4.1015 seviyesine sınırlı bir artış göstermiştir. Ancak bu artış, sistemin genel tasarım kalitesinin mutlak olarak iyileştiği şeklinde yorumlanmamalıdır. Model bileşenleri incelendiğinde, işlevsellik genişlemesinin (Functionality) ve esnekliğin (Flexibility) yapısal karmaşıklık pahasına satın alındığı, bunun neticesinde anlaşılabilirlik (Understandability) ve genişletilebilirlik (Extendibility) niteliklerinde ciddi bir gerileme yaşandığı görülmektedir.
+
+## Metrik Bazlı Analiz
+
+Sistem sürekli büyümüştür. Metot sayısındaki artış hızının sınıf sayısını geçmesi, mevcut sınıflara sürekli olarak yeni sorumluluklar yüklendiğinin ilk yapısal göstergesidir. Avg WMC 17.4048'den 19.5616'ya, Avg RFC 14.2969'dan 15.7763'e yükselmiştir. En çarpıcı negatif trend LCOM değerinde görülmektedir: 157.7969'dan 214.3470'e çıkmıştır. Avg CBO 4.9219'dan 5.0411'e sınırlı artmış, Avg DIT ise 1.8125'ten 1.7580'e gerilemiştir. DAM metriği 0.7739'dan 0.7790'a küçük bir artış göstermiştir.
+
+## QMOOD Kalite Nitelikleri Analizi
+
+TQI genel olarak pozitif bir eğilim sergiliyor gibi görünse de bu durum alt metriklerin birbirini nötrleştirmesinden kaynaklanan yanıltıcı bir dengedir. Reusability 1.0000'dan 1.1132'ye, Flexibility 1.0000'dan 1.1054'e yükselmiştir. Understandability değerinin -0.9900'dan -1.1579'a gerilemesi, doğrudan WMC, RFC ve özellikle LCOM'daki artışın bir bedelidir. Extendibility 1.0000'dan 0.9578'e gerilemiştir.
+
+## Teknik Borç ve Bakım Yapılabilirlik Yorumu
+
+WMC, RFC ve LCOM metriklerinin eş zamanlı olarak yükselmesi, bakım yapılabilirlik açısından yüksek riskli bir teknik borç birikimine işaret eder. LCOM artışı, bazı sınıfların bölünmesi gerektiğini düşündürmektedir. WMC ve RFC artışı, değişikliklerin regresyon riskini artırabilir ve test maliyetini yükseltebilir.
+
+## Mimari Kalite Yorumu
+
+CBO değerindeki sınırlı artış mimari coupling açısından kısa vadede ciddi risk teşkil etmemektedir. Mimarideki en büyük kırılma cohesion tarafındadır. WMC ve RFC trendleri karmaşıklık yönetiminin zorlaştığını göstermektedir. DIT değerinin düşmesi, derin kalıtım hiyerarşilerinden kaçınıldığını düşündürmektedir.
+
+## Refactoring Önerileri
+
+1. Extract Class: Yüksek LCOM değerine sahip sınıflar belirlenerek daha küçük ve yüksek cohesion'lı sınıflara bölünmelidir.
+2. Extract Method: Ortalama WMC artışını azaltmak için uzun ve karmaşık metotlar ayrıştırılmalıdır.
+3. Hide Method / Reduce Accessibility: RFC değerini düşürmek için gereksiz public metotların görünürlüğü azaltılmalıdır.
+4. Replace Method with Method Object: Aşırı yüklü metotların karmaşıklığı ayrı nesnelere taşınabilir.
+
+## Sınırlılıklar ve Sonuç
+
+Analiz yalnızca CK Tool tarafından sağlanan yüksek seviyeli metriklere ve QMOOD çıktısına dayanmaktadır. Sınıf düzeyi ayrıntılar, test kapsamı ve kod kokuları verilmediği için refactoring önerileri metrik düzeyinde kalmaktadır. Picocli, işlevsellik ve esneklik kazanırken cohesion ve anlaşılabilirlik açısından risk üretmiştir.

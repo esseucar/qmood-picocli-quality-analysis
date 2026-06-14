@@ -1,0 +1,39 @@
+# Picocli Projesi: Nesne Yönelimli Metrik Analizi ve QMOOD Kalite Değerlendirmesi (v4.0.4 – v4.7.7)
+
+## 1. Genel Değerlendirme
+
+İncelenen on sürüm boyunca picocli projesi, işlevsel büyüme açısından tutarlı bir genişleme sergilemiştir: sınıf sayısı 192'den 219'a, metod sayısı 1.517'den 1.848'e yükselmiş; buna paralel olarak Reusability, Flexibility, Functionality ve Effectiveness QMOOD nitelikleri referans sürüm olan v4.0.4'e kıyasla belirgin biçimde artış göstermiştir. TQI 4.01'den 4.10'a yükselmiş; bu da yüzeysel bir okumada olumlu bir evrim izlenimi vermektedir.
+
+Ancak Understandability skoru sürekli kötüleşmiş, v4.0.4'teki -0.990'dan v4.7.7'deki -1.158'e gerilemiştir. Extendibility ise 1.000'den 0.958'e düşmüştür. Bu durum, projenin işlevsel açıdan büyüdüğü ancak iç yapısal sağlığını kısmen feda ettiğine işaret etmektedir.
+
+## 2. Metrik Bazlı Analiz
+
+WMC 17.40'tan 19.56'ya yükselmiş, RFC 14.30'dan 15.78'e çıkmıştır. LCOM 157.80'den 214.35'e çıkarak en dikkat çekici artışı göstermiştir. CBO 4.92'den 5.04'e sınırlı artmış, DIT 1.81'den 1.76'ya düşmüştür. DAM değeri 0.773-0.779 aralığında istikrarlı kalmıştır.
+
+## 3. QMOOD Kalite Nitelikleri Analizi
+
+TQI artışı doğrusal değildir ve bileşen bazında incelenmelidir. Reusability ve Flexibility artarken Understandability ve Extendibility düşmüştür. Functionality ve Effectiveness tutarlı biçimde artmıştır. Understandability düşüşü WMC ve RFC'nin büyümesiyle ilişkilidir.
+
+## 4. Teknik Borç ve Bakım Yapılabilirlik Yorumu
+
+LCOM'daki %35.8'lik artış cohesion erozyonunu göstermektedir. WMC ve RFC'nin eş zamanlı artışı karmaşıklık birikimi ve test maliyeti riskini artırmaktadır. Understandability'nin sürekli düşmesi teknik borç göstergesi olarak yorumlanmıştır.
+
+## 5. Mimari Kalite Yorumu
+
+Coupling tarafında CBO artışı sınırlıdır. Cohesion projenin en zayıf halkasıdır. WMC ve RFC artışı test edilebilirlik ve anlaşılabilirlik açısından maliyet yaratmaktadır. DIT'in düşüşü kalıtım hiyerarşisinin sığlaştığını göstermektedir.
+
+## 6. Refactoring Önerileri
+
+1. Yüksek LCOM sınıfları için Extract Class.
+2. Yüksek WMC sınıfları için Extract Method.
+3. Extendibility için Strategy/Template Method yaklaşımlarının değerlendirilmesi.
+4. RFC azaltımı için Facade/arayüz sadeleştirme.
+5. CI/CD sürecine karmaşıklık eşikleri ekleme.
+
+## 7. Sınırlılıklar
+
+Analiz sınıf düzeyinde ortalama değerlere dayanmaktadır. Hangi sınıfların yüksek LCOM veya WMC taşıdığı bilinmemektedir. Cohesion için TCC yerine LCOM proxy'si kullanılmıştır. QMOOD skorları v4.0.4 referansıyla normalize edilmiştir.
+
+## 8. Sonuç
+
+Picocli işlevsel olarak olgunlaşmış; ancak LCOM artışı, WMC büyümesi ve Understandability gerilemesi teknik borcun metriklere yansıdığını göstermektedir. Refactoring stratejisi benimsenmediği takdirde bakım maliyetinin artma riski bulunmaktadır.

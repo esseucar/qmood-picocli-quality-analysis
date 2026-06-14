@@ -1,0 +1,144 @@
+## Picocli Projesi 10 Sürüm Boyunca Tasarım Kalitesi Evrimi: CK Metrikleri ve QMOOD Analizi
+
+### 1. Genel Değerlendirme
+
+Picocli’nin v4.0.4’ten v4.7.7’ye kadar olan 10 sürümü boyunca **Toplam Kalite İndeksi (TQI)** genel olarak artış göstermiştir (4.0100 → 4.1015). Ancak bu artış, tüm kalite niteliklerinde dengeli bir iyileşmeden değil, özellikle **Reusability ve Effectiveness** gibi bazı niteliklerdeki yükselişin, **Understandability ve Extendibility’deki düşüşü** maskelemesinden kaynaklanmaktadır. Sürümler ilerledikçe sistemin işlevselliği (Functionality) ve etkinliği (Effectiveness) artmış, ancak anlaşılabilirlik (Understandability) ciddi biçimde bozulmuştur. Bu durum, **bakım maliyetinde uzun vadeli artış** sinyali vermektedir.
+
+---
+
+### 2. Metrik Bazlı Analiz
+
+#### 2.1. Class Count ve Method Count (Sistem Büyüklüğü)
+- Class sayısı: 192 → 219 (+%14)
+- Method sayısı: 1517 → 1848 (+%21.8)
+
+Sistem hem sınıf hem de metot sayısı olarak önemli ölçüde büyümüştür. Bu büyüme, işlevsellik artışını (Functionality skoru +%5) açıklamaktadır. Ancak metot artış hızı sınıf artış hızını aştığı için **ortalama sınıf başına metot sayısı** artmış, bu da **düşük cohesion ve yükük karmaşıklık** riskini beraberinde getirmiştir.
+
+#### 2.2. Ortalama WMC (Weighted Methods per Class)
+- 17.40 → 19.56 (+%12.4)
+
+WMC, sınıf başına metot karmaşıklığını gösterir. Artış, sınıfların giderek daha karmaşık hale geldiğini ve muhtemelen **Single Responsibility Principle (SRP)** ihlallerinin arttığını gösterir. Özellikle v4.6.3 ve v4.7.7’deki sıçrama dikkat çekicidir.
+
+#### 2.3. Ortalama RFC (Response for a Class)
+- 14.30 → 15.78 (+%10.4)
+
+RFC artışı, bir sınıfın yanıt verebileceği metot sayısının (çağrılabilecek metotlar) arttığını gösterir. Bu, **test edilebilirlik ve anlaşılabilirlik** üzerinde negatif etki yapar. RFC ile WMC’nin birlikte artması, sınıfların hem karmaşık hem de geniş arayüzlere sahip olduğunu gösterir.
+
+#### 2.4. Ortalama LCOM (Lack of Cohesion of Methods)
+- 157.80 → 214.35 (+%35.8)
+
+**En dramatik artış LCOM’da gerçekleşmiştir.** LCOM arttıkça cohesion azalır. Bu, sınıfların giderek daha fazla **ilgisiz sorumlulukları bir araya topladığını** veya metotların ortak bir durum paylaşmadığını gösterir. v4.4.0 sonrası LCOM’daki sıçrama, **refactoring ihtiyacının en önemli göstergesidir.**
+
+#### 2.5. Ortalama CBO (Coupling Between Objects)
+- 4.92 → 5.04 (+%2.4)
+
+CBO sınırlı düzeyde artmıştır (<%3). Bu, **mimari coupling açısından ciddi bir risk oluşturmamaktadır.** Picocli’nin modüler yapısını koruduğu, ancak sınırlı da olsa bağımlılıkların arttığı söylenebilir. Yine de CBO’daki bu küçük artış, Understandability’deki büyük düşüşü açıklamakta yetersiz kalır.
+
+#### 2.6. Ortalama DIT (Depth of Inheritance Tree)
+- 1.81 → 1.76 (-%2.8)
+
+DIT’de **hafif bir düşüş** vardır. Bu, kalıtım hiyerarşisinin derinleşmediği, hatta sığlaştığı anlamına gelir. Kalıtım derinliğinin azalması genellikle **anlaşılabilirlik ve bakım yapılabilirlik açısından olumludur** (derin hiyerarşilerde metot arayışı zorlaşır). Ancak bu olumlu etki, LCOM ve WMC’deki bozulmalar nedeniyle baskılanmıştır.
+
+#### 2.7. DAM (Data Abstraction Metric)
+- 0.774 → 0.779 (+%0.6)
+
+DAM, sınıfların ne kadarının soyut olduğunu gösterir. Hemen hemen sabit kalmıştır. Bu, **soyutlama seviyesinin korunduğunu** ancak iyileştirilmediğini gösterir. Düşük DAM artışı, Extendibility’nin düşmesiyle tutarlıdır.
+
+---
+
+### 3. QMOOD Kalite Nitelikleri Analizi
+
+#### 3.1. Reusability (1.000 → 1.113, +%11.3)
+**İyileşme.** Artan metot ve sınıf sayısı, daha fazla işlevselliğin yeniden kullanılabilir olmasını sağlamıştır. Ancak bu iyileşme, **birimlerin yüksek bağımlılık içinde olması durumunda aldatıcı olabilir.** LCOM artışı, yeniden kullanılabilirliğin aslında daha düşük kalitede olabileceğini gösterir.
+
+#### 3.2. Flexibility (1.000 → 1.105, +%10.5)
+**İyileşme.** CBO’daki sınırlı artış ve DIT’deki düşüş, sistemin esnekliğini koruduğunu gösterir. Ancak Extendibility’nin düşmesiyle birlikte değerlendirildiğinde, Flexibility’nin **kısa vadeli** bir iyileşme olabileceği görülür.
+
+#### 3.3. Understandability (-0.990 → -1.158, -%17.0)
+**Ciddi kötüleşme.** Negatif değerler, referans sürüme göre anlaşılabilirliğin çok daha düşük olduğunu gösterir. Bu, **WMC, RFC ve LCOM’daki artışlarla doğrudan ilişkilidir.** Sınıflar daha fazla metoda, daha karmaşık kontrol akışına ve daha düşük cohesion’a sahiptir. **En kritik kalite bozulmasıdır.**
+
+#### 3.4. Functionality (1.000 → 1.050, +%5.0)
+**İyileşme.** Beklenen bir sonuçtur. Yeni sürümler yeni özellikler getirmiştir. Ancak işlevsellik artışı, diğer kalite niteliklerini olumsuz etkilemiştir.
+
+#### 3.5. Extendibility (1.000 → 0.958, -%4.2)
+**Kötüleşme.** DAM’daki sabitlik ve artan LCOM, yeni davranışlar eklemenin zorlaştığını gösterir. Düşük cohesion’lu sınıflara yeni metot eklemek, mevcut metotlarla etkileşim riskini artırır. Ayrıca WMC artışı, sınıfların şiştiğini ve Open/Closed Principle’ın ihlal edildiğini gösterir.
+
+#### 3.6. Effectiveness (1.000 → 1.033, +%3.3)
+**Hafif iyileşme.** Büyük olasılıkla işlevsellik artışıyla orantılıdır. Ancak etkinlik artışı, kod kalitesindeki bozulmaları haklı çıkarmaz.
+
+#### 3.7. TQI Trendi
+TQI, v4.0.4’ten v4.7.7’ye %2.3 artmıştır. Ancak bu artış, **Understandability’deki -%17’lik düşüşü gizlemektedir.** TQI tek başına aldatıcıdır. Kalite evrimi **dengesiz ve sürdürülemez** bir karakter göstermektedir.
+
+---
+
+### 4. Teknik Borç ve Bakım Yapılabilirlik Yorumu
+
+#### Teknik borç belirtileri:
+1. **Yükük ve artan LCOM** (>%35 artış): Sınıflar aşırı sorumluluk taşımaktadır. Bu, **özellikle v4.4.0 sonrasında biriken tasarım borcudur.**
+2. **Artan WMC ve RFC:** Metot düzeyinde karmaşıklık borcu.
+3. **Düşen Understandability:** Yeni geliştiricilerin sistemi anlama süresi uzamıştır. Bu, **bakım borcunun en açık göstergesidir.**
+4. **Extendibility düşerken Reusability’nin artması:** Yeniden kullanılan kod parçalarının aslında genişletilemez olması, **kısa vadeli kazanç, uzun vadeli borç** anlamına gelir.
+
+#### Bakım riskleri:
+- **Yüksek LCOM** nedeniyle bir metottaki değişiklik, beklenmedik yan etkilere yol açabilir.
+- **Test yazma maliyeti** artmıştır (yüksek RFC).
+- **Anlaşılabilirlik düşük** olduğundan, hata düzeltme süresi uzayacaktır.
+- **Extendibility düşük** olduğundan, yeni özellik eklemek mevcut sınıfları değiştirmeyi gerektirecek, bu da regresyon riskini artıracaktır.
+
+---
+
+### 5. Mimari Kalite Değerlendirmesi
+
+| Boyut | Durum | Yorum |
+|-------|-------|-------|
+| **Coupling (CBO)** | ✅ Kısmen iyi | Sınırlı artış (%2.4) makul düzeyde. Ancak LCOM ile birlikte değerlendirildiğinde, mevcut coupling’in **kalitesiz** olabileceği düşünülmelidir. |
+| **Cohesion (LCOM tersi)** | ❌ Kötü | LCOM’daki %35.8 artış, cohesion’da ciddi bozulma. **En zayıf mimari nokta.** |
+| **Complexity (WMC, RFC)** | ❌ Orta-kötü | WMC %12, RFC %10 arttı. Sınıflar karmaşıklaşıyor. |
+| **Inheritance (DIT)** | ✅ Olumlu | DIT düşüşü, aşırı kalıtım derinliğinden kaçınıldığını gösterir. Ancak bu, composition kullanımının arttığı anlamına gelmez. |
+
+**Mimari kalite özeti:** Coupling yönetilebilir düzeyde, ancak **düşük cohesion ve artan karmaşıklık**, mimari erozyonun ana kaynağıdır. Inheritance yapısı iyidir, ancak bu tek başına yeterli değildir.
+
+---
+
+### 6. Somut Refactoring Önerileri
+
+Aşağıdaki öneriler **yalnızca verilen metrikler** göz önüne alınarak yapılmıştır. Hiçbir sınıf ismi veya modül yapısı uydurulmamıştır.
+
+#### Öncelik 1 (Yüksek etki, acil):
+- **LCOM’u düşürmek için Extract Class refactoring’i:** LCOM değeri en yüksek olan sınıfları belirleyin (CK Tool çıktısından). Bu sınıfları, ilgili metot gruplarına göre birden fazla küçük sınıfa bölün. Her yeni sınıf tek bir sorumluluğa odaklansın (SRP).
+
+- **WMC ve RFC’yi azaltmak için Extract Method ve Decompose Conditional:** Özellikle v4.6.3 ve v4.7.7’de eklenen metotları inceleyin. Uzun metotları daha küçük, özel amaçlı metotlara bölün.
+
+#### Öncelik 2 (Orta etki):
+- **DAM’ı artırmak için Introduce Interface:** Ortak davranış sergileyen ancak somut sınıflar üzerinden bağlanan yapıları tespit edin. Abstraction seviyesini yükseltmek için interfaceler veya abstract sınıflar ekleyin. Bu, Extendibility’yi artıracaktır.
+
+- **Feature Envy refactoring’i:** Yüksek CBO ve düşük cohesion’a sahip sınıflarda, başka sınıfların verilerine aşırı erişen metotları taşıyın.
+
+#### Öncelik 3 (Düşük etki, koruyucu):
+- **DIT değeri ortalamanın üzerinde olan nadir sınıfları** (varsa) belirleyip, inheritance yerine composition kullanmayı değerlendirin. Mevcut DIT düşüşü olumlu olsa da, aykırı değerler risk oluşturabilir.
+
+---
+
+### 7. Sınırlılıklar
+
+Bu analiz aşağıdaki nedenlerle sınırlıdır:
+
+1. **Proxy metrikler:** Composition, Inheritance ve Polymorphism için doğrudan CK Tool metrikleri yerine türetilmiş proxy değerler kullanılmıştır. Bu, özellikle Extendibility ve Flexibility skorlarında gürültü yaratmış olabilir.
+2. **Normalizasyon referansı:** Tüm QMOOD skorları v4.0.4’e göre normalize edildiğinden, mutlak kalite değil göreli değişim ölçülmüştür. Sürüm 4.0.4’ün kendisi de kalitesiz olabilir.
+3. **LCOM proxy’si:** Cohesion için kullanılan ters proxy, gerçek TCC (Tight Class Cohesion) değerinden farklılık gösterebilir. LCOM’daki artış, TCC’deki düşüşle birebir örtüşmeyebilir.
+4. **Sınıf bazında varyans:** Ortalama değerler, aykırı sınıfların etkisini gizleyebilir. Bazı sınıflar çok sağlıklıyken, birkaç “kötü kokulu” sınıf tüm metrikleri bozmuş olabilir.
+5. **Test kapsamı bilgisi yok:** Metrikler, test edilebilirlik hakkında doğrudan bilgi vermez. Yüksek RFC ve WMC, iyi test edilmiş bir kodda daha az sorun çıkarabilir.
+
+---
+
+### 8. Sonuç
+
+Picocli projesinin 10 sürüm boyunca **işlevselliği ve etkinliği artmış, ancak bu artış tasarım kalitesinden ödün verilerek gerçekleştirilmiştir.** En kritik bulgular:
+
+- **Anlaşılabilirlik (Understandability) ciddi biçimde kötüleşmiştir.** Bu, uzun vadede bakım maliyetini artıracak en büyük risktir.
+- **Cohesion (LCOM) %35’ten fazla bozulmuştur.** Sınıflar şişmiş, sorumluluklar dağılmıştır.
+- **Teknik borç birikmiştir.** Özellikle v4.4.0 sonrası LCOM ve WMC’deki sıçramalar, bilinçli veya bilinçsiz alınmış tasarım borcunun göstergesidir.
+- **Coupling yönetilebilir düzeyde kalmıştır.** Bu, projenin tamamen kontrol dışına çıkmadığını gösterir.
+- **TQI yanıltıcıdır.** Genel indeks artarken, kritik alt nitelikler bozulmuştur. Kalite değerlendirmesinde TQI tek başına kullanılmamalıdır.
+
+**Öneri:** v4.7.7’den sonraki geliştirme döngüsüne **refactoring sprint’i** eklenmelidir. Öncelikle **LCOM’u düşürmeye yönelik Extract Class**, ardından **WMC/RFC’yi azaltmaya yönelik Extract Method** refactoring’leri yapılmalıdır. Yeni özellik eklemeden önce teknik borcun azaltılması, sürdürülebilir bir evrim için zorunludur.

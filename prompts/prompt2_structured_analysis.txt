@@ -1,0 +1,38 @@
+Aşağıdaki picocli QMOOD ve CK metrik sonuçlarını değerlendir. Cevabını verilen başlıklarla sınırla ve yalnızca verilen sayısal verilere dayan.
+
+Veri özeti:
+- Sürüm aralığı: v4.0.4 → v4.7.7
+- Class count: 192 → 219
+- Method count: 1517 → 1848
+- Avg CBO: 4.9219 → 5.0411
+- Avg WMC: 17.4048 → 19.5616
+- Avg DIT: 1.8125 → 1.7580
+- Avg RFC: 14.2969 → 15.7763
+- Avg LCOM: 157.7969 → 214.3470
+- DAM: 0.7739 → 0.7790
+- Reusability: 1.0000 → 1.1132
+- Flexibility: 1.0000 → 1.1054
+- Understandability: -0.9900 → -1.1579
+- Functionality: 1.0000 → 1.0498
+- Extendibility: 1.0000 → 0.9578
+- Effectiveness: 1.0000 → 1.0332
+- TQI: 4.0100 → 4.1015
+
+Cevap formatı:
+
+1. Genel kalite eğilimi:
+2. İyileşen kalite nitelikleri:
+3. Kötüleşen kalite nitelikleri:
+4. Bakım yapılabilirlik riski:
+5. Teknik borç göstergeleri:
+6. Mimari bozulma işaretleri:
+7. Refactoring önerileri:
+8. Modelin emin olmadığı noktalar:
+9. Kısa sonuç:
+
+Kurallar:
+- Kod veya sınıf ismi uydurma.
+- Verilmeyen modül yapılarından bahsetme.
+- Metrik değerlerini yorumunda açıkça kullan.
+- QMOOD skorlarının referans sürüme göre normalize edildiğini dikkate al.
+- En fazla 800 kelime yaz.

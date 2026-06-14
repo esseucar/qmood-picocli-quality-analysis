@@ -1,0 +1,191 @@
+
+<h2 class="sr-only">Picocli projesi v4.0.4–v4.7.7 arası QMOOD kalite skoru ve CK metrik evrimi gösterge paneli</h2>
+
+<div style="padding: 1rem 0 0.5rem;">
+  <p style="font-size: 13px; color: var(--color-text-secondary); margin: 0 0 1.5rem;">Sürüm seçerek detay görüntüleyin</p>
+
+  <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.5rem;">
+    <button onclick="setTab('tqi')" id="btn-tqi" style="font-size: 12px; padding: 5px 12px; border-radius: 20px; border: 1.5px solid #3266ad; background: #3266ad; color: #fff; cursor: pointer;">TQI & Nitelikler</button>
+    <button onclick="setTab('ck')" id="btn-ck" style="font-size: 12px; padding: 5px 12px; border-radius: 20px; border: 0.5px solid var(--color-border-secondary); background: transparent; color: var(--color-text-secondary); cursor: pointer;">CK Metrikler</button>
+    <button onclick="setTab('radar')" id="btn-radar" style="font-size: 12px; padding: 5px 12px; border-radius: 20px; border: 0.5px solid var(--color-border-secondary); background: transparent; color: var(--color-text-secondary); cursor: pointer;">v4.0.4 vs v4.7.7</button>
+  </div>
+
+  <div id="tab-tqi">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(100px,1fr)); gap: 10px; margin-bottom: 1.5rem;">
+      <div style="background: var(--color-background-secondary); border-radius: 8px; padding: 12px 10px; text-align:center;">
+        <div style="font-size: 11px; color: var(--color-text-secondary); margin-bottom: 4px;">TQI Δ</div>
+        <div style="font-size: 20px; font-weight: 500; color: var(--color-text-success);">+2.3%</div>
+      </div>
+      <div style="background: var(--color-background-secondary); border-radius: 8px; padding: 12px 10px; text-align:center;">
+        <div style="font-size: 11px; color: var(--color-text-secondary); margin-bottom: 4px;">Reusability Δ</div>
+        <div style="font-size: 20px; font-weight: 500; color: var(--color-text-success);">+11.3%</div>
+      </div>
+      <div style="background: var(--color-background-secondary); border-radius: 8px; padding: 12px 10px; text-align:center;">
+        <div style="font-size: 11px; color: var(--color-text-secondary); margin-bottom: 4px;">Understand. Δ</div>
+        <div style="font-size: 20px; font-weight: 500; color: var(--color-text-danger);">−16.9%</div>
+      </div>
+      <div style="background: var(--color-background-secondary); border-radius: 8px; padding: 12px 10px; text-align:center;">
+        <div style="font-size: 11px; color: var(--color-text-secondary); margin-bottom: 4px;">Extendibility Δ</div>
+        <div style="font-size: 20px; font-weight: 500; color: var(--color-text-danger);">−4.2%</div>
+      </div>
+      <div style="background: var(--color-background-secondary); border-radius: 8px; padding: 12px 10px; text-align:center;">
+        <div style="font-size: 11px; color: var(--color-text-secondary); margin-bottom: 4px;">LCOM Δ</div>
+        <div style="font-size: 20px; font-weight: 500; color: var(--color-text-danger);">+35.8%</div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; font-size: 11px; color: var(--color-text-secondary);">
+      <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:3px;background:#3266ad;border-radius:2px;display:inline-block;"></span>TQI</span>
+      <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:3px;background:#1d9e75;border-radius:2px;display:inline-block;"></span>Reusability</span>
+      <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:3px;background:#7f77dd;border-radius:2px;display:inline-block;"></span>Flexibility</span>
+      <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:3px;background:#e24b4a;border-radius:2px;display:inline-block;"></span>Understandability (mutlak)</span>
+      <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:3px;background:#ba7517;border-radius:2px;border:1px dashed #ba7517;display:inline-block;"></span>Extendibility</span>
+    </div>
+    <div style="position:relative;width:100%;height:300px;">
+      <canvas id="chartTqi" role="img" aria-label="QMOOD kalite nitelikleri trendi v4.0.4 ile v4.7.7 arasında çizgi grafiği">TQI 4.01'den 4.10'a yükselmiş; Understandability −0.99'dan −1.16'ya düşmüş; Extendibility 1.00'dan 0.96'ya gerilemiştir.</canvas>
+    </div>
+  </div>
+
+  <div id="tab-ck" style="display:none;">
+    <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; font-size: 11px; color: var(--color-text-secondary);">
+      <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;background:#3266ad;border-radius:2px;display:inline-block;"></span>Avg WMC</span>
+      <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;background:#e24b4a;border-radius:2px;display:inline-block;"></span>Avg RFC</span>
+      <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;background:#1d9e75;border-radius:2px;display:inline-block;"></span>Avg CBO</span>
+    </div>
+    <div style="position:relative;width:100%;height:280px;margin-bottom:1.5rem;">
+      <canvas id="chartCk" role="img" aria-label="CK metrikleri WMC RFC CBO sürüm bazlı çubuk grafik">WMC 17.4'ten 19.6'ya, RFC 14.3'ten 15.8'e, CBO 4.92'den 5.04'e yükselmiştir.</canvas>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; font-size: 11px; color: var(--color-text-secondary);">
+      <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;background:#7f77dd;border-radius:2px;display:inline-block;"></span>Avg LCOM</span>
+      <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;background:#ba7517;border-radius:2px;display:inline-block;"></span>Class Count</span>
+    </div>
+    <div style="position:relative;width:100%;height:260px;">
+      <canvas id="chartLcom" role="img" aria-label="LCOM ve sınıf sayısı trendi">LCOM 157.8'den 214.3'e, sınıf sayısı 192'den 219'a yükselmiştir.</canvas>
+    </div>
+  </div>
+
+  <div id="tab-radar" style="display:none;">
+    <p style="font-size: 12px; color: var(--color-text-secondary); margin: 0 0 12px;">v4.0.4 (referans) ile v4.7.7 (son sürüm) karşılaştırması. Understandability skorları mutlak değer olarak alınmıştır.</p>
+    <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; font-size: 11px; color: var(--color-text-secondary);">
+      <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;background:rgba(50,102,173,0.4);border:1.5px solid #3266ad;border-radius:2px;display:inline-block;"></span>v4.0.4</span>
+      <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;background:rgba(29,158,117,0.4);border:1.5px solid #1d9e75;border-radius:2px;display:inline-block;"></span>v4.7.7</span>
+    </div>
+    <div style="position:relative;width:100%;height:340px;">
+      <canvas id="chartRadar" role="img" aria-label="v4.0.4 ve v4.7.7 QMOOD radar karşılaştırması">Reusability, Flexibility, Functionality, Effectiveness artmış; Understandability ve Extendibility düşmüştür.</canvas>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const versions = ['v4.0.4','v4.1.0','v4.1.4','v4.2.0','v4.3.0','v4.3.2','v4.4.0','v4.5.2','v4.6.3','v4.7.7'];
+const tqi = [4.0100,4.0034,3.9989,4.0211,4.0593,4.0780,4.0863,4.0812,4.0804,4.1015];
+const reuse = [1.0000,1.0063,1.0058,1.0319,1.0655,1.0705,1.0803,1.0809,1.0927,1.1132];
+const flex = [1.0000,1.0029,1.0024,1.0208,1.0458,1.0466,1.0564,1.0552,1.0911,1.1054];
+const understand = [-0.9900,-1.0015,-1.0040,-1.0268,-1.0593,-1.0611,-1.0910,-1.0938,-1.1419,-1.1579];
+const understandAbs = understand.map(v => Math.abs(v));
+const extend = [1.0000,0.9927,0.9916,0.9768,0.9684,0.9775,0.9864,0.9840,0.9688,0.9578];
+const wmc = [17.4048,17.6031,17.6959,18.0000,18.5097,18.4203,18.7895,18.8325,19.2419,19.5616];
+const rfc = [14.2969,14.4485,14.5052,14.7437,15.0971,15.0338,15.2105,15.2919,15.5163,15.7763];
+const cbo = [4.9219,4.9485,4.9558,4.9950,4.9854,4.9807,4.9569,4.9809,5.0093,5.0411];
+const lcom = [157.7969,160.1928,160.9280,165.2915,173.6410,173.0420,185.5460,185.2300,209.2870,214.3470];
+const classCount = [192,194,194,199,206,207,209,209,215,219];
+
+let charts = {};
+
+function setTab(name) {
+  ['tqi','ck','radar'].forEach(t => {
+    document.getElementById('tab-'+t).style.display = t===name ? 'block' : 'none';
+    const btn = document.getElementById('btn-'+t);
+    if(t===name){btn.style.background='#3266ad';btn.style.color='#fff';btn.style.border='1.5px solid #3266ad';}
+    else{btn.style.background='transparent';btn.style.color='var(--color-text-secondary)';btn.style.border='0.5px solid var(--color-border-secondary)';}
+  });
+  if(name==='tqi' && !charts.tqi) buildTqi();
+  if(name==='ck' && !charts.ck) buildCk();
+  if(name==='radar' && !charts.radar) buildRadar();
+}
+
+function buildTqi(){
+  charts.tqi = new Chart(document.getElementById('chartTqi'),{
+    type:'line',
+    data:{
+      labels: versions,
+      datasets:[
+        {label:'TQI',data:tqi,borderColor:'#3266ad',backgroundColor:'rgba(50,102,173,0.08)',pointRadius:4,pointBackgroundColor:'#3266ad',tension:0.3,yAxisID:'y'},
+        {label:'Reusability',data:reuse,borderColor:'#1d9e75',pointRadius:3,pointBackgroundColor:'#1d9e75',tension:0.3,borderDash:[],yAxisID:'y2'},
+        {label:'Flexibility',data:flex,borderColor:'#7f77dd',pointRadius:3,pointBackgroundColor:'#7f77dd',tension:0.3,yAxisID:'y2'},
+        {label:'Underst. (mutlak)',data:understandAbs,borderColor:'#e24b4a',pointRadius:3,pointBackgroundColor:'#e24b4a',tension:0.3,borderDash:[5,4],yAxisID:'y2'},
+        {label:'Extendibility',data:extend,borderColor:'#ba7517',pointRadius:3,pointBackgroundColor:'#ba7517',tension:0.3,borderDash:[3,3],yAxisID:'y2'},
+      ]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false}},
+      scales:{
+        y:{position:'left',title:{display:true,text:'TQI',font:{size:11}},ticks:{font:{size:11}}},
+        y2:{position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'Nitelik skoru',font:{size:11}},ticks:{font:{size:11}}}
+      }
+    }
+  });
+}
+
+function buildCk(){
+  charts.ck = new Chart(document.getElementById('chartCk'),{
+    type:'bar',
+    data:{
+      labels:versions,
+      datasets:[
+        {label:'Avg WMC',data:wmc,backgroundColor:'rgba(50,102,173,0.75)',borderColor:'#3266ad',borderWidth:1},
+        {label:'Avg RFC',data:rfc,backgroundColor:'rgba(226,75,74,0.75)',borderColor:'#e24b4a',borderWidth:1},
+        {label:'Avg CBO',data:cbo,backgroundColor:'rgba(29,158,117,0.75)',borderColor:'#1d9e75',borderWidth:1},
+      ]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false}},
+      scales:{x:{ticks:{font:{size:10},maxRotation:40,autoSkip:false}},y:{ticks:{font:{size:11}}}}
+    }
+  });
+  charts.lcom = new Chart(document.getElementById('chartLcom'),{
+    type:'line',
+    data:{
+      labels:versions,
+      datasets:[
+        {label:'Avg LCOM',data:lcom,borderColor:'#7f77dd',backgroundColor:'rgba(127,119,221,0.10)',pointRadius:4,pointBackgroundColor:'#7f77dd',tension:0.3,fill:true,yAxisID:'y'},
+        {label:'Class Count',data:classCount,borderColor:'#ba7517',pointRadius:3,pointBackgroundColor:'#ba7517',tension:0.3,borderDash:[4,3],yAxisID:'y2'},
+      ]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false}},
+      scales:{
+        x:{ticks:{font:{size:10},maxRotation:40,autoSkip:false}},
+        y:{position:'left',title:{display:true,text:'LCOM',font:{size:11}},ticks:{font:{size:11}}},
+        y2:{position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'Sınıf sayısı',font:{size:11}},ticks:{font:{size:11}}}
+      }
+    }
+  });
+}
+
+function buildRadar(){
+  charts.radar = new Chart(document.getElementById('chartRadar'),{
+    type:'radar',
+    data:{
+      labels:['Reusability','Flexibility','|Underst.|','Functionality','Extendibility','Effectiveness'],
+      datasets:[
+        {label:'v4.0.4',data:[1.0000,1.0000,0.9900,1.0000,1.0000,1.0000],
+         borderColor:'#3266ad',backgroundColor:'rgba(50,102,173,0.20)',pointBackgroundColor:'#3266ad',pointRadius:4},
+        {label:'v4.7.7',data:[1.1132,1.1054,1.1579,1.0498,0.9578,1.0332],
+         borderColor:'#1d9e75',backgroundColor:'rgba(29,158,117,0.20)',pointBackgroundColor:'#1d9e75',pointRadius:4,borderDash:[4,3]},
+      ]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false}},
+      scales:{r:{ticks:{font:{size:10},stepSize:0.2},pointLabels:{font:{size:11}},suggestedMin:0.8,suggestedMax:1.2}}
+    }
+  });
+}
+
+buildTqi();
+</script>
